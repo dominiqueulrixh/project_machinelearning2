@@ -32,4 +32,20 @@ async function sendMessage() {
     console.log("Received conversationId:", conversationId);  // Debug-Ausgabe
 
     document.getElementById("chatbox").innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
-    document.getElementById("chatbox").in
+    document.getElementById("chatbox").innerHTML += `<p><strong>Bot:</strong> ${data.answer}</p>`;
+    document.getElementById("userInput").value = '';
+    document.getElementById("chatbox").scrollTop = document.getElementById("chatbox").scrollHeight;
+}
+
+async function loadConversations() {
+    clearChat(); // Führe die Funktion clearChat aus, um sicherzustellen, dass ein neuer Chat gestartet wird
+}
+
+function clearChat() {
+    document.getElementById("chatbox").innerHTML = `<p><strong>Bot:</strong> Hallo, ich bin dein persönlicher Anwalt und bin spezialisiert auf das Schweizerische Zivilgesetzbuch. Du kannst mich gerne alles darüber fragen.</p>`;  // Setzt den Begrüßungstext
+    document.getElementById("userInput").value = '';  // Setzt das Eingabefeld zurück
+    conversationId = null;  // Setzt die Konversations-ID zurück
+    console.log("Cleared conversationId");  // Debug-Ausgabe
+}
+
+window.onload = loadConversations;
