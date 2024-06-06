@@ -31,8 +31,8 @@ async function sendMessage() {
     }
     console.log("Received conversationId:", conversationId);  // Debug-Ausgabe
 
-    document.getElementById("chatbox").innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
-    document.getElementById("chatbox").innerHTML += `<p><strong>Bot:</strong> ${data.answer}</p>`;
+    document.getElementById("chatbox").innerHTML += `<p><strong>Mandant:</strong> ${userInput}</p>`;
+    document.getElementById("chatbox").innerHTML += `<p><strong>Anwalt:</strong> ${data.answer}</p>`;
     document.getElementById("userInput").value = '';
     document.getElementById("chatbox").scrollTop = document.getElementById("chatbox").scrollHeight;
 }

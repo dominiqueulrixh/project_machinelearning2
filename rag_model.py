@@ -44,7 +44,7 @@ def generate_prompt(context, question):
     task = "Erhalte die Frage des Mandanten und antworte mit einem lebensechten Alltagsbeispiel."
     steps = "Beantworte die Frage präzise und klar in nicht mehr als zwei Sätzen. Inkludiere relevante Abschnitte aus dem Schweizer Zivilgesetzbuch, falls zutreffend."
     example = "Frage: Ab wann ist eine Person erwachsen?\nAntwort: Art. 14 ZGB: Eine Person ist erwachsen, wenn sie das 18. Lebensjahr vollendet hat. Zum Beispiel, Anna wurde am 1. Januar 2004 geboren, sie wird daher am 1. Januar 2022 volljährig."
-    format = "Bitte antworte immer auf Deutsch und beginne jede Antwort mit der Artikelbezeichnung des ZGBs, gefolgt von einem Doppelpunkt, bevor du die Antwort gibst."
+    format = "Bitte antworte immer auf Deutsch und beginne jede Antwort mit der Artikelbezeichnung des ZGBs, gefolgt von einem Doppelpunkt, bevor du die Antwort gibst. Starte die Antwort nie mit 'Anwalt:' oder ähnliches, sondern immer mit dem Artikel, wenn vorhanden."
 
     instruction = f"{role} {task} {steps} {format} {example}"
     optimized_prompt = f"{context}\nUser: {question}\n{instruction}"
@@ -62,5 +62,5 @@ chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=chrom
 
 # Example usage
 def ask_question(conversation_history, question):
-    context = "\n".join([f"User: {msg['question']}\nBot: {msg['answer']}" for msg in conversation_history])
+    context = "\n".join([f"Mandant: {msg['question']}\nAnwalt: {msg['answer']}" for msg in conversation_history])
     return query_chain(context, question)

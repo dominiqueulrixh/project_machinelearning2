@@ -1,11 +1,11 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: rgb(241, 219, 209);
     padding: 20px;
 }
 
 #chatbox {
-    border: 1px solid #ccc;
+    border: 1px solid rgb(240, 183, 157);
     padding: 10px;
     height: 300px;
     overflow-y: scroll;
@@ -16,13 +16,13 @@ body {
 input[type="text"] {
     width: calc(100% - 22px);
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(240, 183, 157);
     border-radius: 4px;
 }
 
 button {
     padding: 10px 20px;
-    background-color: #007BFF;
+    background-color: rgb(240, 183, 157);
     color: white;
     border: none;
     border-radius: 4px;
@@ -30,5 +30,5 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: rgb(238, 152, 113);
 }
