@@ -79,13 +79,13 @@ To ensure that the questions asked are relevant to other people and not just to 
 In addition to manual and interactive data collection, the questions posed to the chatbot and the generated answers are stored in a MySQL database. This represents a form of synthetic data generation, as this data is continuously expanded and forms the basis for future improvements and adjustments to the chatbot. This continuous data collection through user interactions ensures that the chatbot can access a growing data set to refine and enhance its responses further.
 
 ### 3. Modeling
-For the modeling of my project, I primarily relied on the techniques of prompt engineering and zero-shot inference to utilize OpenAI's GPT-4o language model.
+For the modeling of my project, I primarily relied on the techniques of prompt engineering and few-shot inference to utilize OpenAI's GPT-4o language model.
 
 #### Prompt Engineering
 Through specific prompt engineering, I trained the model to provide precise and understandable answers to questions about the Swiss Civil Code. I developed and optimized various prompts to ensure that the model not only correctly reproduces legal information but also incorporates everyday scenarios and examples. An example of an optimized prompt is: "You are an expert in Swiss Civil Law. Please provide a concise and clear answer in no more than three sentences. Include relevant sections from the Swiss Civil Code if applicable. Please answer always in German."
 
-#### Zero-Shot/Few-Shot Inference
-I used the GPT-4o model in a zero-shot mode to ensure that it can answer new and unfamiliar legal questions without extensive training. This was particularly important as the model needed to cover a wide range of questions that could arise in the context of the Swiss Civil Code.
+#### Few-Shot Inference
+I utilized the GPT-4o model in a few-shot mode to enhance its ability to answer new and unfamiliar legal questions more accurately. By providing the model with several example questions and answers, I ensured that it could handle a wide range of inquiries related to the Swiss Civil Code more effectively. This approach allowed the model to understand the context and nuances of the legal domain, leading to more precise and relevant responses.
 
 #### Integration of APIs
 To perform the modeling, I integrated the OpenAI API to access the GPT-4o model. This API integration allows the chatbot to process user queries in real-time and provide legal information.
