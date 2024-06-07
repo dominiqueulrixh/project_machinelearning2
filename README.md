@@ -1,17 +1,56 @@
-# Chatbot-Project for ML2
+# Boby, the Lawyer-Chatbot
+
+![ExampleInDE](frontend/images/DE_Erbrecht.png)
+![ExampleInEN](frontend/images/EN_Adoption.png)
+
+## Table of Contents
+- [Boby, the Lawyer-Chatbot](#boby-the-lawyer-chatbot)
+  - [Table of Contents](#table-of-contents)
+  - [Project Setup and Execution](#project-setup-and-execution)
+    - [1. Clone the Project from GitHub](#1-clone-the-project-from-github)
+    - [2. Create .env File in your Root and add the following environment variables:](#2-create-env-file-in-your-root-and-add-the-following-environment-variables)
+    - [3. Set Up MySQL Database:](#3-set-up-mysql-database)
+    - [4. Create and Activate a virtual Environment (project works with python version 3.11.4)](#4-create-and-activate-a-virtual-environment-project-works-with-python-version-3114)
+    - [5. Install Required Python Packages](#5-install-required-python-packages)
+    - [6. Install HTTP Server for Frontend](#6-install-http-server-for-frontend)
+    - [7. Run the Script to Automatically Download the Latest Civil Code PDF](#7-run-the-script-to-automatically-download-the-latest-civil-code-pdf)
+    - [8. Start the Backend Server](#8-start-the-backend-server)
+    - [9. Start the Frontend Server](#9-start-the-frontend-server)
+    - [10. Open localhost:8001 / http://127.0.0.1:8001 and the chatbot is ready to talk with you :)!](#10-open-localhost8001--http1270018001-and-the-chatbot-is-ready-to-talk-with-you-)
+  - [Detailed Information about my Chatbot-Project](#detailed-information-about-my-chatbot-project)
+    - [1. Project goal/Motivation](#1-project-goalmotivation)
+      - [What problem are you trying to solve?](#what-problem-are-you-trying-to-solve)
+      - [What is the motivation behind it?](#what-is-the-motivation-behind-it)
+      - [Why is this project relevant?](#why-is-this-project-relevant)
+    - [2. Data Collection or Generation](#2-data-collection-or-generation)
+      - [Data Scraping Source: Public PDF](#data-scraping-source-public-pdf)
+      - [Interactive Data Collection](#interactive-data-collection)
+      - [Synthetic Data Generation](#synthetic-data-generation)
+    - [3. Modeling](#3-modeling)
+      - [Prompt Engineering](#prompt-engineering)
+      - [Few-Shot Inference](#few-shot-inference)
+      - [Integration of APIs](#integration-of-apis)
+    - [4. Interpretation and Validation](#4-interpretation-and-validation)
+      - [Weaknesses of the Chatbot:](#weaknesses-of-the-chatbot)
+
 
 ## Project Setup and Execution
 ### 1. Clone the Project from GitHub
+```bash
 git clone https://github.com/dominiqueulrixh/project_machinelearning2.git
+```
 
 ### 2. Create .env File in your Root and add the following environment variables:
+```bash
 DB_HOST="YOUR_DB_HOST"
 DB_USER="YOUR_DB_USER"
 DB_PASS="YOUR_DB_PASSWORD"
 DB_NAME="YOUR_DB_NAME"
 OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
+```
 
 ### 3. Set Up MySQL Database:
+```bash
 CREATE DATABASE your_mysql_database;
 USE your_mysql_database;
 CREATE TABLE conversations (
@@ -27,31 +66,56 @@ CREATE TABLE conversation_counter (
     current_id INT NOT NULL
 );
 INSERT INTO conversation_counter (current_id) VALUES (1);
+```
 
 ### 4. Create and Activate a virtual Environment (project works with python version 3.11.4)
-`python -m venv .venv`
-On MacOS: `source .venv/bin/activate`  On Windows: `.venv\Scripts\activate`
+```bash
+python -m venv .venv
+```
+On MacOS: 
+```bash
+source .venv/bin/activate 
+```
+On Windows: 
+```bash
+.venv\Scripts\activate
+```
 
 ### 5. Install Required Python Packages
-`pip install -r requirements.txt`
+```bash
+pip install -r requirements.txt
+```
 
 ### 6. Install HTTP Server for Frontend
-`npm install -g http-server` (for MacOS User, add `sudo` in front of the command)
+```bash
+`npm install -g http-server`
+```
+ (for MacOS User, add `sudo` in front of the command)
 
 ### 7. Run the Script to Automatically Download the Latest Civil Code PDF
-`python scripts/update_pdf.py`
+```bash
+python scripts/update_pdf.py
+```
 
 ### 8. Start the Backend Server
 open a new terminal
+```bash
 `uvicorn app:app --reload`
+```
 (Wait until you see "INFO: Application startup complete.")
 
 ### 9. Start the Frontend Server
 open a new terminal
+```bash
 `cd frontend`
+```
+```bash
 `http-server -p 8001`
+```
 
 ### 10. Open localhost:8001 / http://127.0.0.1:8001 and the chatbot is ready to talk with you :)!
+
+Function note: The project was successfully tested on both MacOS and Windows before submission.
 
 
 ## Detailed Information about my Chatbot-Project
@@ -101,5 +165,6 @@ Additionally, I conducted a manual review where I verified and evaluated the ref
 Through this combination of automatic and manual validation, I ensured that the chatbot's responses are accurate and reliable. The validation of results through numerical methods and manual review has helped confirm the accuracy and reliability of the chatbot.
 
 #### Weaknesses of the Chatbot:
-Language: The chatbot cannot perform direct translations from English to German. Additionally, if there is a language switch during the same conversation, it becomes confused and returns prompt information as a response.
+**Language:** The chatbot cannot perform direct translations from English to German. Additionally, if there is a language switch during the same conversation, it becomes confused and returns prompt information as a response.
+**Personal Questions:** If the chatbot is asked too many personal questions without context, it can also become confused and provide prompt information in return.
 
