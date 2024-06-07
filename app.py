@@ -100,4 +100,7 @@ async def get_conversations():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT * FROM conversations")
-    conv
+    conversations = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return conversations
