@@ -3,28 +3,52 @@
 1. Clone the Project from GitHub
 git clone (https://github.com/dominiqueulrixh/project_machinelearning2.git)
 
-2. Create and Activate a virtual Environment
+2. Create .env File in your Root and add the following environment variables:
+DB_HOST="YOUR_DB_HOST"
+DB_USER="YOUR_DB_USER"
+DB_PASS="YOUR_DB_PASS"
+DB_NAME="YOUR_DB_NAME"
+OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
+
+3. Set Up MySQL Database:
+CREATE DATABASE your_mysql_database;
+USE your_mysql_database;
+CREATE TABLE conversations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(255),
+    question TEXT,
+    answer TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    conversation_id VARCHAR(255)
+);
+CREATE TABLE conversation_counter (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    current_id INT NOT NULL
+);
+INSERT INTO conversation_counter (current_id) VALUES (1);
+
+4. Create and Activate a virtual Environment
 python -m venv .venv
 source .venv/bin/activate  # On Windows use `.venv\Scripts\activate`
 
-3. Install Required Python Packages
+5. Install Required Python Packages
 pip install -r requirements.txt
 
-4. Install HTTP Server for Frontend
+6. Install HTTP Server for Frontend
 sudo npm install -g http-server
 
-5. Run the Script to Automatically Download the Latest Civil Code PDF
+7. Run the Script to Automatically Download the Latest Civil Code PDF
 python scripts/update_pdf.py
 
-6. Start the Backend Server
+8. Start the Backend Server
 uvicorn app:app --reload
 (Wait until you see "INFO: Application startup complete.")
 
-7. Start the Frontend Server
+9. Start the Frontend Server
 cd frontend
 http-server -p 8001
 
-8. Open localhost:8001 and the chatbot is ready to talk with you :)!
+10. Open localhost:8001 and the chatbot is ready to talk with you :)!
 
 
 # Detailed Information about my Chatbot-Project
