@@ -8,7 +8,7 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=300)
 loader = PyPDFLoader("data/Zivilgesetzbuch.pdf")
 chunks = loader.load_and_split(text_splitter)
 
@@ -21,7 +21,7 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Initialize the OpenAI chat model
-llm = ChatOpenAI(model_name="gpt-4o", temperature=0.8)
+llm = ChatOpenAI(model_name="gpt-4o", temperature=0.3)
 
 # Initialize the OpenAI embeddings model
 embeddings = OpenAIEmbeddings()
@@ -30,6 +30,7 @@ embeddings = OpenAIEmbeddings()
 chroma_db = None
 
 if os.path.exists("civillaw_db"):
+    print("Loading civillaw_db from disk...")
     chroma_db = Chroma(persist_directory="civillaw_db", embedding_function=embeddings)
 else:
     chroma_db = Chroma.from_documents(documents=chunks,
@@ -37,37 +38,42 @@ else:
                                       persist_directory="civillaw_db",
                                       collection_name="lc_chroma")
 
+
 # Function to generate and optimize prompts
 def generate_prompt(context, question):
-    role = "Du bist ein Anwalt, spezialisiert auf das Zivilgesetzbuch."
-    task = "Erhalte die Frage des Mandanten und antworte mit einem lebensechten Alltagsbeispiel."
-    steps = "Beantworte die Frage präzise und klar in nicht mehr als zwei Sätzen. Inkludiere relevante Abschnitte aus dem Schweizer Zivilgesetzbuch, falls zutreffend."
-    format = "Bitte beginne jede Antwort mit der Artikelbezeichnung des ZGBs, gefolgt von einem Doppelpunkt, bevor du die Antwort gibst. Starte die Antwort nie mit 'Anwalt:' oder ähnliches, sondern immer mit dem Artikel, wenn vorhanden."
-    
+    role = "You are a lawyer specializing in the Civil Code."
+    task = "Answer civil law questions. Answer in the same language as the question is formulated. If the question is general, provide a brief description of your skills or knowledge."
+    steps = "Start with the article reference. Answer the question. Add a real-life example."
+    format = "Begin each answer with the article designation of the Civil Code if available, followed by a colon. Answer in no more than three sentences."
+
     # Few-shot examples
     examples = [
-        "Frage: Ab wann ist eine Person erwachsen?\nAntwort: Art. 14 ZGB: Eine Person ist erwachsen, wenn sie das 18. Lebensjahr vollendet hat. Zum Beispiel, Anna wurde am 1. Januar 2004 geboren, sie wird daher am 1. Januar 2022 volljährig.",
-        "Frage: Was passiert mit dem Eigentum eines Verstorbenen?\nAntwort: Art. 560 ZGB: Das Eigentum eines Verstorbenen geht direkt auf die Erben über. Beispielsweise, wenn Herr Müller stirbt, geht sein Haus sofort an seine Kinder über.",
-        "Frage: Wann gilt eine Ehe als ungültig?\nAntwort: Art. 105 ZGB: Eine Ehe kann als ungültig erklärt werden, wenn einer der Ehegatten zur Zeit der Eheschließung geschäftsunfähig war. Zum Beispiel, wenn Max aufgrund eines schweren Unfalls nicht in der Lage war, Entscheidungen zu treffen, kann seine Ehe angefochten werden.",
-        "Frage: Welche Rechte hat ein Mieter bei Mängeln an der Mietsache?\nAntwort: Art. 259a ZGB: Der Mieter kann eine Herabsetzung des Mietzinses verlangen, wenn ein erheblicher Mangel vorliegt. Zum Beispiel, wenn in Sarahs Wohnung die Heizung im Winter ausfällt, kann sie eine Mietzinsreduktion verlangen.",
-        "Frage: Unter welchen Bedingungen kann ein Arbeitsvertrag gekündigt werden?\nAntwort: Art. 335 ZGB: Ein Arbeitsvertrag kann unter Einhaltung der vertraglich vereinbarten Kündigungsfrist gekündigt werden. Beispielsweise, wenn Peter eine Kündigungsfrist von drei Monaten hat, kann sein Arbeitgeber ihm unter Einhaltung dieser Frist kündigen.",
-        "Frage: Wer ist verantwortlich für den Unterhalt eines Kindes?\nAntwort: Art. 276 ZGB: Die Eltern sind verpflichtet, für den Unterhalt des Kindes zu sorgen. Zum Beispiel, wenn Maria und Tom sich scheiden lassen, müssen beide weiterhin für die Kosten des Kindes aufkommen.",
-        "Frage: Wann verjährt eine Forderung aus einem Kaufvertrag?\nAntwort: Art. 127 ZGB: Forderungen aus Kaufverträgen verjähren in fünf Jahren. Zum Beispiel, wenn Paul im Januar 2020 ein Auto verkauft hat und der Käufer nicht bezahlt hat, verjährt die Forderung im Januar 2025.",
-        "Frage: Unter welchen Umständen kann ein Testament angefochten werden?\nAntwort: Art. 519 ZGB: Ein Testament kann angefochten werden, wenn der Erblasser beim Verfassen nicht urteilsfähig war. Beispielsweise, wenn Lisa unter dem Einfluss von Medikamenten stand und nicht klar denken konnte, könnte ihr Testament angefochten werden.",
-        "Frage: Was sind die Voraussetzungen für die Adoption eines Kindes?\nAntwort: Art. 264 ZGB: Zur Adoption ist die Zustimmung des Kindes und der leiblichen Eltern erforderlich. Zum Beispiel, wenn Max und Julia ein Kind adoptieren wollen, müssen sowohl das Kind als auch seine leiblichen Eltern der Adoption zustimmen."
+        "Question: From when is a person considered an adult?\nAnswer: Art. 14 ZGB: A person is considered an adult when they have reached the age of 18. For example, Anna was born on January 1, 2004, so she will be an adult on January 1, 2022.",
+        "Question: What happens to the property of a deceased person?\nAnswer: Art. 560 ZGB: The property of a deceased person passes directly to the heirs. For example, when Mr. Müller dies, his house immediately goes to his children.",
+        "Question: When is a marriage considered invalid?\nAnswer: Art. 105 ZGB: A marriage can be declared invalid if one of the spouses was incapacitated at the time of the marriage. For example, if Max was unable to make decisions due to a severe accident, his marriage can be contested.",
+        "Question: What rights does a tenant have regarding defects in the rental property?\nAnswer: Art. 259a ZGB: The tenant can request a reduction in rent if there is a significant defect. For example, if the heating fails in Sarah's apartment during winter, she can request a rent reduction.",
+        "Question: Under what conditions can an employment contract be terminated?\nAnswer: Art. 335 ZGB: An employment contract can be terminated by observing the contractually agreed notice period. For example, if Peter has a notice period of three months, his employer can terminate his contract by observing this notice period.",
+        "Question: Who is responsible for the maintenance of a child?\nAnswer: Art. 276 ZGB: Parents are obligated to provide for the maintenance of the child. For example, if Maria and Tom divorce, both must continue to cover the costs for the child.",
+        "Question: When does a claim from a sales contract expire?\nAnswer: Art. 127 ZGB: Claims from sales contracts expire in five years. For example, if Paul sold a car in January 2020 and the buyer did not pay, the claim expires in January 2025.",
+        "Question: Under what circumstances can a will be contested?\nAnswer: Art. 519 ZGB: A will can be contested if the testator was not competent when drafting it. For example, if Lisa was under the influence of medication and could not think clearly, her will could be contested.",
+        "Question: What are the requirements for adopting a child?\nAnswer: Art. 264 ZGB: Adoption requires the consent of the child and the biological parents. For example, if Max and Julia want to adopt a child, both the child and the biological parents must consent to the adoption."
     ]
-    
-    instruction = f"{role} {task} {steps} {format}"
+
+    instruction = f"{role}\n{task}\n{steps}\n{format}"
     examples_text = "\n\n".join(examples)
-    optimized_prompt = f"{context}\n{examples_text}\nFrage: {question}\n{instruction}"
+    optimized_prompt = f"{context}\n\n{examples_text}\n\nQuestion: {question}\n\n{instruction}"
     print("Generated Prompt:", optimized_prompt)  # Debug-Ausgabe
     return optimized_prompt
-
 
 # Function to query the chain with optimized prompt
 def query_chain(context, question):
     prompt = generate_prompt(context, question)
     response = chain.invoke(prompt)
+
+    if prompt in response['result']:
+        print("Irrelevant answer detected, retrying.")
+        response['result'] = "It seems that your question was not specific enough. I specialize in the Swiss Civil Code and can answer questions on various legal topics such as marriage, inheritance law, tenancy law, and more."
+    
     return response['result']
 
 # Initialize the retrieval QA chain
@@ -75,5 +81,5 @@ chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=chrom
 
 # Example usage
 def ask_question(conversation_history, question):
-    context = "\n".join([f"Mandant: {msg['question']}\nAnwalt: {msg['answer']}" for msg in conversation_history])
+    context = "\n".join([f"Mandant: {msg['question']}\Boby: {msg['answer']}" for msg in conversation_history])
     return query_chain(context, question)

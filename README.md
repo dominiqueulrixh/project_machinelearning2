@@ -98,6 +98,8 @@ In my project, I asked the chatbot 15 questions on the topic of civil law. Eight
 
 Additionally, I conducted a manual review where I verified and evaluated the referenced article numbers. To further validate the results, I took two measures that are documented in .doc/Validating the results.pdf.
 
-
-
 Through this combination of automatic and manual validation, I ensured that the chatbot's responses are accurate and reliable. The validation of results through numerical methods and manual review has helped confirm the accuracy and reliability of the chatbot.
+
+#### Weaknesses of the Chatbot:
+Language: The chatbot cannot perform direct translations from English to German. Additionally, if there is a language switch during the same conversation, it becomes confused and returns prompt information as a response.
+
