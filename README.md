@@ -36,7 +36,7 @@ INSERT INTO conversation_counter (current_id) VALUES (1);
 `pip install -r requirements.txt`
 
 ### 6. Install HTTP Server for Frontend
-`sudo npm install -g http-server`
+`npm install -g http-server` (for MacOS User, add `sudo` in front of the command)
 
 ### 7. Run the Script to Automatically Download the Latest Civil Code PDF
 `python scripts/update_pdf.py`
