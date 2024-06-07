@@ -166,6 +166,7 @@ Additionally, I conducted a manual review where I verified and evaluated the ref
 Through this combination of automatic and manual validation, I ensured that the chatbot's responses are accurate and reliable. The validation of results through numerical methods and manual review has helped confirm the accuracy and reliability of the chatbot.
 
 #### Weaknesses of the Chatbot:
-**Language:** The chatbot cannot perform direct translations from English to German. Additionally, if there is a language switch during the same conversation, it becomes confused and returns prompt information as a response.
+**Language:** The chatbot cannot perform direct translations from English to German. Additionally, if there is a language switch during the same conversation, it becomes confused and returns prompt information as a response. 
+
 **Personal Questions:** If the chatbot is asked too many personal questions without context, it can also become confused and provide prompt information in return.
 
