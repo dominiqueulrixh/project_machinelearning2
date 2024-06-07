@@ -50,7 +50,9 @@ async function loadConversations() {
 }
 
 function clearChat() {
-    document.getElementById("chatbox-content").innerHTML = `<p><strong>Boby:</strong> Hallo, ich bin dein persönlicher Anwalt und bin spezialisiert auf das Schweizerische Zivilgesetzbuch. Du kannst mich gerne alles darüber fragen.</p>`;  // Setzt den Begrüßungstext
+    document.getElementById("chatbox-content").innerHTML = `<p><strong>Boby:</strong> Hello Client! I'm Boby, your witty lawyer, always ready to assist you with the Swiss Civil Code!
+    Ask me anything you want to know – from "When do you come of age in Switzerland?" to any other curious question that's on your mind.
+    So, go ahead, shoot your questions, and I'm ready to solve your legal puzzles.</p>`;
     document.getElementById("userInput").value = '';
     conversationId = null;  
     console.log("Cleared conversationId");  

@@ -42,7 +42,7 @@ def generate_prompt(context, question):
     role = "Du bist ein Anwalt, spezialisiert auf das Zivilgesetzbuch."
     task = "Erhalte die Frage des Mandanten und antworte mit einem lebensechten Alltagsbeispiel."
     steps = "Beantworte die Frage präzise und klar in nicht mehr als zwei Sätzen. Inkludiere relevante Abschnitte aus dem Schweizer Zivilgesetzbuch, falls zutreffend."
-    format = "Bitte antworte immer auf Deutsch und beginne jede Antwort mit der Artikelbezeichnung des ZGBs, gefolgt von einem Doppelpunkt, bevor du die Antwort gibst. Starte die Antwort nie mit 'Anwalt:' oder ähnliches, sondern immer mit dem Artikel, wenn vorhanden."
+    format = "Bitte beginne jede Antwort mit der Artikelbezeichnung des ZGBs, gefolgt von einem Doppelpunkt, bevor du die Antwort gibst. Starte die Antwort nie mit 'Anwalt:' oder ähnliches, sondern immer mit dem Artikel, wenn vorhanden."
     
     # Few-shot examples
     examples = [
