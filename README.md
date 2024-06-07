@@ -67,7 +67,7 @@ My motivation is to bridge the gap between the complex legal world and the gener
 In a time when digital solutions are becoming increasingly important, our chatbot offers an innovative way to disseminate knowledge while lowering barriers to accessing legal information. This not only provides individual support but also promotes a broader understanding and acceptance of the legal system.
 
 
-## 2. Data Collection or Generation (project evaluation relative weight: 30%)
+## 2. Data Collection or Generation
 
 ### Data Scraping Source: Public PDF
 In my project, I implemented a script (update_pdf.py) to automatically collect data from the Swiss government's website that publishes the Civil Code. The script uses web scraping to regularly check the website and download the latest PDF version of the Civil Code. Utilizing libraries like requests, BeautifulSoup, and selenium, the script parses the webpage, finds the relevant PDF link, and downloads the document. If the script runs it runs hourly to ensure the most current version is always available, replacing the old document with the new one. This automated data collection ensures that the chatbot always has access to the latest legal information, enhancing the accuracy and reliability of its responses.
