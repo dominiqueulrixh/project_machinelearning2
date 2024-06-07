@@ -10,7 +10,7 @@
     - [1. Clone the Project from GitHub](#1-clone-the-project-from-github)
     - [2. Create .env File in your Root and add the following environment variables:](#2-create-env-file-in-your-root-and-add-the-following-environment-variables)
     - [3. Set Up MySQL Database:](#3-set-up-mysql-database)
-    - [4. Create a virtual Environment (project works well with python version 3.11.4)](#4-create-a-virtual-environment-project-works-well-with-python-version-3114)
+    - [4. Create a virtual Environment](#4-create-a-virtual-environment)
     - [5. Install Required Python Packages](#5-install-required-python-packages)
     - [6. Install HTTP Server for Frontend](#6-install-http-server-for-frontend)
     - [7. Run the Script to Automatically Download the Latest Civil Code PDF](#7-run-the-script-to-automatically-download-the-latest-civil-code-pdf)
@@ -68,7 +68,8 @@ CREATE TABLE conversation_counter (
 INSERT INTO conversation_counter (current_id) VALUES (1);
 ```
 
-### 4. Create a virtual Environment (project works well with python version 3.11.4)
+### 4. Create a virtual Environment 
+(project works well with python version 3.11.4)
 ```bash
 python -m venv .venv
 ```
