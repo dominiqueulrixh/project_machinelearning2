@@ -89,7 +89,7 @@ pip install -r requirements.txt
 
 ### 6. Install HTTP Server for Frontend
 ```bash
-`npm install -g http-server`
+npm install -g http-server
 ```
  (for MacOS User, add `sudo` in front of the command)
 
@@ -101,17 +101,17 @@ python scripts/update_pdf.py
 ### 8. Start the Backend Server
 open a new terminal
 ```bash
-`uvicorn app:app --reload`
+uvicorn app:app --reload
 ```
 (Wait until you see "INFO: Application startup complete.")
 
 ### 9. Start the Frontend Server
 open a new terminal
 ```bash
-`cd frontend`
+cd frontend
 ```
 ```bash
-`http-server -p 8001`
+http-server -p 8001
 ```
 
 ### 10. Open localhost:8001 / http://127.0.0.1:8001 and the chatbot is ready to talk with you :)!
