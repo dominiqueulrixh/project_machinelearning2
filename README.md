@@ -24,6 +24,7 @@ uvicorn app:app --reload
 cd frontend
 http-server -p 8001
 
+8. Open localhost:8001 and the chatbot is ready to talk with you :)!
 
 
 # Detailed Information about my Chatbot-Project

@@ -18,40 +18,4 @@ body {
     background-position: right 20px center;
 }
 
-#chatbox::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.5); /* Halbtransparente weiße Überlagerung */
-    z-index: 1; /* Über dem Hintergrundbild, aber unter dem Inhalt des Chatbox-Elements */
-    pointer-events: none; /* Ermöglicht Interaktionen mit dem darunterliegenden Inhalt */
-}
-
-#chatbox-content {
-    position: relative;
-    z-index: 2; /* Über der Überlagerung positionieren */
-}
-
-
-input[type="text"] {
-    width: calc(100% - 22px);
-    padding: 10px;
-    border: 1px solid rgb(240, 183, 157);
-    border-radius: 4px;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: rgb(240, 183, 157);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: rgb(238, 152, 113);
-}
+#chat

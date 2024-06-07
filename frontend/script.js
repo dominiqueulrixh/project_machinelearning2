@@ -45,7 +45,4 @@ function clearChat() {
     document.getElementById("chatbox-content").innerHTML = `<p><strong>Anwalt:</strong> Hallo, ich bin dein persönlicher Anwalt und bin spezialisiert auf das Schweizerische Zivilgesetzbuch. Du kannst mich gerne alles darüber fragen.</p>`;  // Setzt den Begrüßungstext
     document.getElementById("userInput").value = '';  // Setzt das Eingabefeld zurück
     conversationId = null;  // Setzt die Konversations-ID zurück
-    console.log("Cleared conversationId");  // Debug-Ausgabe
-}
-
-window.onload = loadConversations;
+    console.log("Cleared conversationId");  // De
