@@ -49,7 +49,7 @@ INSERT INTO conversation_counter (current_id) VALUES (1);
 `cd frontend`
 `http-server -p 8001`
 
-### 10. Open localhost:8001 and the chatbot is ready to talk with you :)!
+### 10. Open localhost:8001 / http://127.0.0.1:8001 and the chatbot is ready to talk with you :)!
 
 
 ## Detailed Information about my Chatbot-Project

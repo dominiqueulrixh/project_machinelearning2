@@ -2,11 +2,11 @@
 import openai
 import os
 from dotenv import load_dotenv
-from langchain.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader
 from langchain.chains import RetrievalQA
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
 loader = PyPDFLoader("data/Zivilgesetzbuch.pdf")
@@ -21,7 +21,7 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Initialize the OpenAI chat model
-llm = ChatOpenAI(model_name="gpt-4", temperature=0.8)
+llm = ChatOpenAI(model_name="gpt-4o", temperature=0.8)
 
 # Initialize the OpenAI embeddings model
 embeddings = OpenAIEmbeddings()
