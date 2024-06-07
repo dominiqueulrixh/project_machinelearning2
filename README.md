@@ -1,4 +1,3 @@
-
 ## Project Setup and Execution
 1. Clone the Project from GitHub
 git clone (https://github.com/dominiqueulrixh/project_machinelearning2.git)
@@ -27,26 +26,26 @@ CREATE TABLE conversation_counter (
 );
 INSERT INTO conversation_counter (current_id) VALUES (1);
 
-4. Create and Activate a virtual Environment
-python -m venv .venv
-source .venv/bin/activate  # On Windows use `.venv\Scripts\activate`
+4. Create and Activate a virtual Environment (project works with python version 3.11.4)
+`python -m venv .venv`
+`source .venv/bin/activate`  # On Windows use `.venv\Scripts\activate`
 
 5. Install Required Python Packages
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 6. Install HTTP Server for Frontend
-sudo npm install -g http-server
+`sudo npm install -g http-server`
 
 7. Run the Script to Automatically Download the Latest Civil Code PDF
-python scripts/update_pdf.py
+`python scripts/update_pdf.py`
 
 8. Start the Backend Server
-uvicorn app:app --reload
+`uvicorn app:app --reload`
 (Wait until you see "INFO: Application startup complete.")
 
 9. Start the Frontend Server
-cd frontend
-http-server -p 8001
+`cd frontend`
+`http-server -p 8001`
 
 10. Open localhost:8001 and the chatbot is ready to talk with you :)!
 
