@@ -67,6 +67,9 @@ def generate_prompt(context, question):
 
 # Function to query the chain with optimized prompt
 def query_chain(context, question):
+    if question.strip() == "":
+        return "Please ask me something about the civil code."
+        
     prompt = generate_prompt(context, question)
     response = chain.invoke(prompt)
 

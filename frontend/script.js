@@ -29,10 +29,12 @@ async function sendMessage() {
         conversationId = data.conversation_id; 
     }
 
-    document.getElementById("chatbox-content").innerHTML += `<p><strong>Mandant:</strong> ${userInput}</p>`;
-    document.getElementById("chatbox-content").innerHTML += `<p><strong>Boby:</strong> ${data.answer}</p>`;
+    const chatboxContent = document.getElementById("chatbox-content");
+    chatboxContent.innerHTML += `<p><strong>Mandant:</strong> ${userInput}</p>`;
+    chatboxContent.innerHTML += `<p><strong>Boby:</strong> ${data.answer}</p>`;
     document.getElementById("userInput").value = '';
-    document.getElementById("chatbox-content").scrollTop = document.getElementById("chatbox-content").scrollHeight;
+    
+    chatbox.scrollTop = chatbox.scrollHeight;
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -50,7 +52,8 @@ async function loadConversations() {
 }
 
 function clearChat() {
-    document.getElementById("chatbox-content").innerHTML = `<p><strong>Boby:</strong> Hello Client! I'm Boby, your witty lawyer, always ready to assist you with the Swiss Civil Code!
+    const chatboxContent = document.getElementById("chatbox-content");
+    chatboxContent.innerHTML = `<p><strong>Boby:</strong> Hello Client! I'm Boby, your witty lawyer, always ready to assist you with the Swiss Civil Code!
     Ask me anything you want to know – from "When do you come of age in Switzerland?" to any other curious question that's on your mind.
     So, go ahead, shoot your questions, and I'm ready to solve your legal puzzles.</p>`;
     document.getElementById("userInput").value = '';

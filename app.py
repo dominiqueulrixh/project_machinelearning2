@@ -11,7 +11,8 @@ from rag_model import ask_question
 
 warnings.filterwarnings("ignore", message="WatchFiles detected changes")
 
-load_dotenv()  # Lädt die .env Datei
+# Ladet die .env Datei
+load_dotenv()  
 
 app = FastAPI()
 
@@ -36,15 +37,15 @@ class Query(BaseModel):
 
 @app.post("/chat")
 async def chat(query: Query):
-    print("Received query:", query.json())  # Debug-Ausgabe der empfangenen Daten
+    print("Received query:", query.json()) 
 
     conversation_id = query.conversation_id
     if conversation_id is None:
-        conversation_id = get_next_conversation_id()  # Erhalte die nächste Konversations-ID
-    print("Current conversation_id:", conversation_id)  # Debug-Ausgabe
+        conversation_id = get_next_conversation_id()  
+    print("Current conversation_id:", conversation_id)  
 
     history = get_conversation_history(conversation_id)
-    print("Conversation History:", history)  # Debug-Ausgabe
+    print("Conversation History:", history) 
     answer = ask_question(history, query.question)
     if not answer:
         raise HTTPException(status_code=500, detail="Error processing the query")
@@ -94,7 +95,7 @@ def get_next_conversation_id():
     conn.commit()
     cursor.close()
     conn.close()
-    return str(next_id)  # Konvertiere next_id in einen String
+    return str(next_id)
 
 @app.get("/conversations")
 async def get_conversations():
