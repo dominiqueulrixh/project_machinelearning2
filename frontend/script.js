@@ -30,10 +30,10 @@ async function sendMessage() {
     }
 
     const chatboxContent = document.getElementById("chatbox-content");
-    chatboxContent.innerHTML += `<p><strong>Mandant:</strong> ${userInput}</p>`;
+    chatboxContent.innerHTML += `<p><strong>Client:</strong> ${userInput}</p>`;
     chatboxContent.innerHTML += `<p><strong>Boby:</strong> ${data.answer}</p>`;
     document.getElementById("userInput").value = '';
-    
+
     chatbox.scrollTop = chatbox.scrollHeight;
 }
 

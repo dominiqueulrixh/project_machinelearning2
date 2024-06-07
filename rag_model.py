@@ -30,7 +30,6 @@ embeddings = OpenAIEmbeddings()
 chroma_db = None
 
 if os.path.exists("civillaw_db"):
-    print("Loading civillaw_db from disk...")
     chroma_db = Chroma(persist_directory="civillaw_db", embedding_function=embeddings)
 else:
     chroma_db = Chroma.from_documents(documents=chunks,
@@ -39,6 +38,7 @@ else:
                                       collection_name="lc_chroma")
 
 
+# Function to generate and optimize prompts
 # Function to generate and optimize prompts
 def generate_prompt(context, question):
     role = "You are a lawyer specializing in the Civil Code."
@@ -68,7 +68,7 @@ def generate_prompt(context, question):
 # Function to query the chain with optimized prompt
 def query_chain(context, question):
     if question.strip() == "":
-        return "Please ask me something about the civil code."
+        return {"result": "Please ask me something about the civil code."}
         
     prompt = generate_prompt(context, question)
     response = chain.invoke(prompt)
@@ -77,7 +77,10 @@ def query_chain(context, question):
         print("Irrelevant answer detected, retrying.")
         response['result'] = "It seems that your question was not specific enough. I specialize in the Swiss Civil Code and can answer questions on various legal topics such as marriage, inheritance law, tenancy law, and more."
     
-    return response['result']
+    if response['result'].startswith("Question:"):
+        response['result'] = "I cannot answer this question, please rephrase it."
+
+    return response
 
 # Initialize the retrieval QA chain
 chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=chroma_db.as_retriever())

@@ -37,21 +37,23 @@ class Query(BaseModel):
 
 @app.post("/chat")
 async def chat(query: Query):
-    print("Received query:", query.json()) 
+    print("Received query:", query.json())  
 
     conversation_id = query.conversation_id
     if conversation_id is None:
-        conversation_id = get_next_conversation_id()  
+        conversation_id = get_next_conversation_id() 
     print("Current conversation_id:", conversation_id)  
 
     history = get_conversation_history(conversation_id)
-    print("Conversation History:", history) 
-    answer = ask_question(history, query.question)
+    print("Conversation History:", history)  # Debug-Ausgabe
+    response = ask_question(history, query.question)
+    answer = response['result'] if isinstance(response, dict) else response  
     if not answer:
         raise HTTPException(status_code=500, detail="Error processing the query")
     
     save_conversation(query.user_id, conversation_id, query.question, answer)
     return {"answer": answer, "conversation_id": conversation_id}
+
 
 def get_db_connection():
     return mysql.connector.connect(
