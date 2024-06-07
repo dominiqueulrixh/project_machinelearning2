@@ -75,12 +75,12 @@ def check_for_update():
     
     # Temporäre Datei für den Download
     temp_pdf_path = os.path.join(tempfile.gettempdir(), "temp_zivilgesetzbuch.pdf")
-    print(f"Neues PDF gefunden. Herunterladen von {pdf_link_full}")
+    print(f"New PDF found. Downloading from {pdf_link_full}")
     download_pdf(pdf_link_full, temp_pdf_path)
     
     # Verschieben des heruntergeladenen PDFs ins Zielverzeichnis
     shutil.move(temp_pdf_path, pdf_path)
-    print("PDF erfolgreich heruntergeladen und verschoben.")
+    print("PDF successfully downloaded. Script is running... ")
 
     # Löschen von verbleibenden .crdownload-Dateien
     for file in os.listdir(pdf_directory):

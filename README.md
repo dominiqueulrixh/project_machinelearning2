@@ -2,12 +2,12 @@
 
 ## Project Setup and Execution
 ### 1. Clone the Project from GitHub
-git clone (https://github.com/dominiqueulrixh/project_machinelearning2.git)
+git clone https://github.com/dominiqueulrixh/project_machinelearning2.git
 
 ### 2. Create .env File in your Root and add the following environment variables:
 DB_HOST="YOUR_DB_HOST"
 DB_USER="YOUR_DB_USER"
-DB_PASS="YOUR_DB_PASS"
+DB_PASS="YOUR_DB_PASSWORD"
 DB_NAME="YOUR_DB_NAME"
 OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
 
@@ -30,7 +30,7 @@ INSERT INTO conversation_counter (current_id) VALUES (1);
 
 ### 4. Create and Activate a virtual Environment (project works with python version 3.11.4)
 `python -m venv .venv`
-`source .venv/bin/activate`  # On Windows use `.venv\Scripts\activate`
+On MacOS: `source .venv/bin/activate`  On Windows: `.venv\Scripts\activate`
 
 ### 5. Install Required Python Packages
 `pip install -r requirements.txt`
@@ -42,10 +42,12 @@ INSERT INTO conversation_counter (current_id) VALUES (1);
 `python scripts/update_pdf.py`
 
 ### 8. Start the Backend Server
+open a new terminal
 `uvicorn app:app --reload`
 (Wait until you see "INFO: Application startup complete.")
 
 ### 9. Start the Frontend Server
+open a new terminal
 `cd frontend`
 `http-server -p 8001`
 
@@ -82,7 +84,7 @@ In addition to manual and interactive data collection, the questions posed to th
 For the modeling of my project, I primarily relied on the techniques of prompt engineering and few-shot inference to utilize OpenAI's GPT-4o language model.
 
 #### Prompt Engineering
-Through specific prompt engineering, I trained the model to provide precise and understandable answers to questions about the Swiss Civil Code. I developed and optimized various prompts to ensure that the model not only correctly reproduces legal information but also incorporates everyday scenarios and examples. An example of an optimized prompt is: "You are an expert in Swiss Civil Law. Please provide a concise and clear answer in no more than three sentences. Include relevant sections from the Swiss Civil Code if applicable. Please answer always in German."
+Through specific prompt engineering, I trained the model to provide precise and understandable answers to questions about the Swiss Civil Code. I developed and optimized various prompts to ensure that the model not only correctly reproduces legal information but also incorporates everyday scenarios and examples. An example of an optimized prompt is: "You are an expert in Swiss Civil Law. Please provide a concise and clear answer in no more than three sentences. Include relevant sections from the Swiss Civil Code if applicable."
 
 #### Few-Shot Inference
 I utilized the GPT-4o model in a few-shot mode to enhance its ability to answer new and unfamiliar legal questions more accurately. By providing the model with several example questions and answers, I ensured that it could handle a wide range of inquiries related to the Swiss Civil Code more effectively. This approach allowed the model to understand the context and nuances of the legal domain, leading to more precise and relevant responses.
@@ -94,6 +96,8 @@ To perform the modeling, I integrated the OpenAI API to access the GPT-4o model.
 ### 4. Interpretation and Validation
 In my project, I asked the chatbot 15 questions on the topic of civil law. Eight of these questions came from two individuals in my acquaintance. These 15 questions were then submitted for automatic review by ChatGPT-4o, which checked the answers against the Civil Code that I provided.
 
-Additionally, I conducted a manual review where I verified and evaluated the referenced article numbers. To further validate the results, I took two measures that are documented in the .doc folder under Validating the results.pdf.
+Additionally, I conducted a manual review where I verified and evaluated the referenced article numbers. To further validate the results, I took two measures that are documented in .doc/Validating the results.pdf.
+
+
 
 Through this combination of automatic and manual validation, I ensured that the chatbot's responses are accurate and reliable. The validation of results through numerical methods and manual review has helped confirm the accuracy and reliability of the chatbot.

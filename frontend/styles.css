@@ -37,7 +37,6 @@ body {
     z-index: 2; /* Über der Überlagerung positionieren */
 }
 
-
 input[type="text"] {
     background-color:  rgb(237, 209, 196);
     width: calc(100% - 22px);
@@ -53,26 +52,10 @@ input[type="text"] {
     display: flex;
     justify-content: center;
     align-items: center;
- 
 }
 
-button {
-    padding: 10px 20px;
-    background-color: rgb(240, 183, 157);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: rgb(238, 152, 113);
-}
-
-
-/* CSS */
 .button-62 {
-  background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+  background: linear-gradient(to bottom right, #C68081, #DDA6A0);
   border: 0;
   border-radius: 12px;
   color: #FFFFFF;
@@ -95,9 +78,9 @@ button:hover {
 }
 
 .button-62:not([disabled]):focus {
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(198, 128, 129, 0.5);
 }
 
 .button-62:not([disabled]):hover {
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(198, 128, 129, 0.5);
 }
