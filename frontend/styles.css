@@ -5,30 +5,17 @@ body {
 }
 
 #chatbox {
+    position: relative; /* Wichtig für die Positionierung der Überlagerung */
     border: 1px solid rgb(240, 183, 157);
     padding: 10px;
     height: 300px;
     overflow-y: scroll;
-    background-color: #fff;
+    background-color:  rgb(237, 209, 196);
     margin-bottom: 10px;
+    background-image: url('images/chzivil.png'); /* Fügen Sie das Hintergrundbild hinzu */
+    background-size: 20%;
+    background-repeat: no-repeat;
+    background-position: right 20px center;
 }
 
-input[type="text"] {
-    width: calc(100% - 22px);
-    padding: 10px;
-    border: 1px solid rgb(240, 183, 157);
-    border-radius: 4px;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: rgb(240, 183, 157);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: rgb(238, 152, 113);
-}
+#chat

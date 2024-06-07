@@ -62,5 +62,4 @@ chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=chrom
 
 # Example usage
 def ask_question(conversation_history, question):
-    context = "\n".join([f"Mandant: {msg['question']}\nAnwalt: {msg['answer']}" for msg in conversation_history])
-    return query_chain(context, question)
+    context = "\n".join([f"Mandant: {msg['questio

@@ -31,10 +31,10 @@ async function sendMessage() {
     }
     console.log("Received conversationId:", conversationId);  // Debug-Ausgabe
 
-    document.getElementById("chatbox").innerHTML += `<p><strong>Mandant:</strong> ${userInput}</p>`;
-    document.getElementById("chatbox").innerHTML += `<p><strong>Anwalt:</strong> ${data.answer}</p>`;
+    document.getElementById("chatbox-content").innerHTML += `<p><strong>Mandant:</strong> ${userInput}</p>`;
+    document.getElementById("chatbox-content").innerHTML += `<p><strong>Anwalt:</strong> ${data.answer}</p>`;
     document.getElementById("userInput").value = '';
-    document.getElementById("chatbox").scrollTop = document.getElementById("chatbox").scrollHeight;
+    document.getElementById("chatbox-content").scrollTop = document.getElementById("chatbox-content").scrollHeight;
 }
 
 async function loadConversations() {
@@ -42,10 +42,7 @@ async function loadConversations() {
 }
 
 function clearChat() {
-    document.getElementById("chatbox").innerHTML = `<p><strong>Bot:</strong> Hallo, ich bin dein persönlicher Anwalt und bin spezialisiert auf das Schweizerische Zivilgesetzbuch. Du kannst mich gerne alles darüber fragen.</p>`;  // Setzt den Begrüßungstext
+    document.getElementById("chatbox-content").innerHTML = `<p><strong>Anwalt:</strong> Hallo, ich bin dein persönlicher Anwalt und bin spezialisiert auf das Schweizerische Zivilgesetzbuch. Du kannst mich gerne alles darüber fragen.</p>`;  // Setzt den Begrüßungstext
     document.getElementById("userInput").value = '';  // Setzt das Eingabefeld zurück
     conversationId = null;  // Setzt die Konversations-ID zurück
-    console.log("Cleared conversationId");  // Debug-Ausgabe
-}
-
-window.onload = loadConversations;
+    console.log("Cleared conversationId");  // De
