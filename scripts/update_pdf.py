@@ -51,4 +51,55 @@ def check_for_update():
         pdf_button.click()
         time.sleep(5)  # Warten, bis das iframe geladen ist
 
-        # Finden des iframe mit dem PDF-Li
+        # Finden des iframe mit dem PDF-Link
+        iframe = driver.find_element(By.XPATH, "//iframe[@type='application/pdf']")
+        pdf_link = iframe.get_attribute('src')
+        
+    except Exception as e:
+        print("PDF-Link oder Datum der letzten Änderung nicht gefunden.")
+        print(e)
+        driver.quit()
+        return
+
+    driver.quit()
+
+    # Basis-URL entfernen, falls vorhanden
+    if pdf_link.startswith("https://www.fedlex.admin.ch"):
+        pdf_link_full = pdf_link
+    else:
+        pdf_link_full = f"https://www.fedlex.admin.ch{pdf_link}"
+    
+    # Altes PDF löschen
+    if os.path.exists(pdf_path):
+        os.remove(pdf_path)
+    
+    # Temporäre Datei für den Download
+    temp_pdf_path = os.path.join(tempfile.gettempdir(), "temp_zivilgesetzbuch.pdf")
+    print(f"Neues PDF gefunden. Herunterladen von {pdf_link_full}")
+    download_pdf(pdf_link_full, temp_pdf_path)
+    
+    # Verschieben des heruntergeladenen PDFs ins Zielverzeichnis
+    shutil.move(temp_pdf_path, pdf_path)
+    print("PDF erfolgreich heruntergeladen und verschoben.")
+
+    # Löschen von verbleibenden .crdownload-Dateien
+    for file in os.listdir(pdf_directory):
+        if file.endswith(".crdownload"):
+            os.remove(os.path.join(pdf_directory, file))
+
+# Hauptfunktion
+def main():
+    # Sicherstellen, dass das Verzeichnis existiert
+    if not os.path.exists(pdf_directory):
+        os.makedirs(pdf_directory)
+    
+    while True:
+        try:
+            check_for_update()
+        except Exception as e:
+            print(f"Fehler beim Überprüfen der Webseite: {e}")
+        # Warten Sie eine Stunde, bevor Sie erneut überprüfen
+        time.sleep(3600)
+
+if __name__ == "__main__":
+    main()
