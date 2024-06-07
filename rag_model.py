@@ -8,7 +8,7 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
 loader = PyPDFLoader("data/Zivilgesetzbuch.pdf")
 chunks = loader.load_and_split(text_splitter)
 
@@ -30,7 +30,6 @@ embeddings = OpenAIEmbeddings()
 chroma_db = None
 
 if os.path.exists("civillaw_db"):
-    print("Loading civillaw_db from disk...")
     chroma_db = Chroma(persist_directory="civillaw_db", embedding_function=embeddings)
 else:
     chroma_db = Chroma.from_documents(documents=chunks,

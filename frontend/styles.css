@@ -5,29 +5,31 @@ body {
 }
 
 #chatbox {
-    position: relative; /* Wichtig für die Positionierung der Überlagerung */
+    position: relative;
     border-radius: 10px;
     padding: 10px;
     height: 350px;
     overflow-y: scroll;
     background-color:  rgb(237, 209, 196);
     margin-bottom: 10px;
-    background-image: url('images/chzivil.png'); /* Fügen Sie das Hintergrundbild hinzu */
-    background-size: 20%;
+    background-image: url('images/chzivil.png');
+    background-size: 40%;
     background-repeat: no-repeat;
-    background-position: right 20px center;
+    background-position: right 40px center;
 }
 
-#chatbox::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.5); /* Halbtransparente weiße Überlagerung */
-    z-index: 1; /* Über dem Hintergrundbild, aber unter dem Inhalt des Chatbox-Elements */
-    pointer-events: none; /* Ermöglicht Interaktionen mit dem darunterliegenden Inhalt */
+#chatbox::-webkit-scrollbar {
+    width: 12px; /* Breite der Scrollbar */
+}
+
+#chatbox::-webkit-scrollbar-track {
+
+    border-radius: 10px;
+}
+
+#chatbox::-webkit-scrollbar-thumb {
+    background-color: #E4B1A6; /* Farbe des Scrollbar-Daumen */
+    border-radius: 10px;
 }
 
 #chatbox-content {
@@ -37,10 +39,13 @@ body {
 
 
 input[type="text"] {
+    background-color:  rgb(237, 209, 196);
     width: calc(100% - 22px);
-    padding: 10px;
+    padding: 8px;
     border: 1px solid rgb(240, 183, 157);
     border-radius: 6px;
+    color: black;
+    font-size: 12px;
 }
 
 .actionbutton {
